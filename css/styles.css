@@ -1470,3 +1470,46 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   color: var(--clr-text-muted);
   line-height: var(--lh-relaxed);
 }
+
+
+/* ── Mobile Contact Fix ───────────────────────────────────── */
+.contact-section {
+  padding: var(--section-gap) var(--sp-5);
+}
+@media (max-width: 900px) {
+  .contact-layout {
+    gap: var(--sp-8);
+  }
+  .contact-info {
+    padding-inline: 0;
+  }
+}
+@media (max-width: 540px) {
+  .contact-info-card {
+    padding: var(--sp-5);
+  }
+}
+
+
+/* ── Mobile Contact Fix ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .contact-section {
+    padding: var(--section-gap) var(--sp-5);
+  }
+  .contact-layout {
+    grid-template-columns: 1fr !important;
+    gap: var(--sp-8);
+    width: 100%;
+    min-width: 0;
+  }
+  .contact-info {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .contact-info-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+}
