@@ -351,7 +351,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
     flex-direction: column;
     transform: translateX(100%);
     transition: transform var(--t-slow);
-    z-index: 1001;
+    z-index: 2000;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -363,8 +363,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    z-index: 1000;
-    backdrop-filter: blur(2px);
+    z-index: 999;
   }
   .nav-overlay.open { display: block; }
 
