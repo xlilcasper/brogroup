@@ -1324,7 +1324,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   background: var(--clr-bg-card);
   border: 1px solid var(--clr-border);
   border-radius: var(--r-xl);
-  padding: var(--sp-7);
+  padding: var(--sp-8);
 }
 .contact-info-card h3 {
   font-size: var(--fs-base);
@@ -1348,10 +1348,12 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   border-color: rgba(224,82,82,0.2);
 }
 .contact-info-card.crisis h3 { color: #e07070; }
-.contact-info-card.crisis ul { display: flex; flex-direction: column; gap: var(--sp-2); margin: var(--sp-4) 0; }
+.contact-info-card.crisis ul { display: flex; flex-direction: column; gap: var(--sp-3); margin: var(--sp-5) 0; }
 .contact-info-card.crisis li { font-size: var(--fs-sm); color: var(--clr-text-muted); }
 .contact-info-card.crisis li strong { display: inline; font-weight: var(--fw-bold); color: var(--clr-text); text-transform: none; letter-spacing: normal; }
 .contact-info-card.crisis a { color: var(--clr-gold); }
+
+.contact-info-card.crisis p + p { margin-top: var(--sp-4); }
 
 /* ── Animations ──────────────────────────────────────────── */
 @keyframes fadeUp {
@@ -1524,7 +1526,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
 }
 @media (max-width: 540px) {
   .contact-info-card {
-    padding: var(--sp-5);
+    padding: var(--sp-6);
   }
 }
 
