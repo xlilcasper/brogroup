@@ -345,9 +345,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
     right: 0;
     bottom: 0;
     width: min(320px, 85vw);
-    background: rgba(12,12,12,0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(12,12,12,0.99);
     padding: var(--sp-6) var(--sp-6) var(--sp-8);
     display: flex;
     flex-direction: column;
