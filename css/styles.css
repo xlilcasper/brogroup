@@ -341,14 +341,16 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   .nav-toggle { display: flex; }
   .main-nav {
     position: fixed;
-    inset: var(--header-h) 0 0 0;
+    inset: 0;
     background: rgba(12,12,12,0.97);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: var(--sp-8) var(--sp-6);
+    padding: calc(var(--header-h) + var(--sp-8)) var(--sp-6) var(--sp-8);
     transform: translateX(100%);
     transition: transform var(--t-slow);
     z-index: 999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .main-nav.open { transform: translateX(0); }
   .main-nav ul {
