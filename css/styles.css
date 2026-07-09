@@ -341,29 +341,43 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   .nav-toggle { display: flex; }
   .main-nav {
     position: fixed;
-    inset: 0;
-    background: rgba(12,12,12,0.97);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 85vw);
+    background: rgba(12,12,12,0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: calc(var(--header-h) + var(--sp-8)) var(--sp-6) var(--sp-8);
+    padding: var(--sp-6) var(--sp-6) var(--sp-8);
+    display: flex;
+    flex-direction: column;
     transform: translateX(100%);
     transition: transform var(--t-slow);
-    z-index: 999;
+    z-index: 1001;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
   .main-nav.open { transform: translateX(0); }
 
+  /* Dark overlay behind the drawer */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+  }
+  .nav-overlay.open { display: block; }
+
   /* Close button inside mobile nav */
   .nav-close {
     display: flex;
-    position: absolute;
-    top: calc(var(--header-h) / 2 - 18px);
-    right: var(--sp-5);
-    width: 36px;
-    height: 36px;
     align-items: center;
     justify-content: center;
+    align-self: flex-end;
+    width: 36px;
+    height: 36px;
     background: rgba(245,245,245,0.08);
     border-radius: var(--r-md);
     color: var(--clr-text);
@@ -372,22 +386,25 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
     transition: background var(--t-fast);
     cursor: pointer;
     border: none;
+    flex-shrink: 0;
+    margin-bottom: var(--sp-6);
   }
   .nav-close:hover { background: rgba(245,245,245,0.15); }
 
   .main-nav ul {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--sp-2);
+    gap: var(--sp-1);
   }
   .main-nav a {
     font-size: var(--fs-xl);
     font-weight: var(--fw-semibold);
     padding: var(--sp-3) var(--sp-4);
-    width: 100%;
     border-radius: var(--r-lg);
+    transition: color var(--t-fast), background var(--t-fast);
   }
   .main-nav a.active { background: var(--clr-gold-dim); color: var(--clr-gold); }
+  .main-nav a:hover { background: rgba(245,245,245,0.06); color: var(--clr-text); }
 }
 
 /* ── HERO ────────────────────────────────────────────────── */

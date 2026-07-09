@@ -9,10 +9,21 @@
 const navToggle  = document.getElementById('nav-toggle');
 const mainNav    = document.getElementById('main-nav');
 const navClose   = document.getElementById('nav-close');
+const navOverlay = document.getElementById('nav-overlay');
+
+function openNav() {
+  mainNav.classList.add('open');
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
+  if (navOverlay) navOverlay.classList.add('open');
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+  document.body.style.overflow = 'hidden';
+}
 
 function closeNav() {
   mainNav.classList.remove('open');
   if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+  if (navOverlay) navOverlay.classList.remove('open');
   document.body.style.position = '';
   document.body.style.width = '';
   document.body.style.overflow = '';
@@ -20,12 +31,16 @@ function closeNav() {
 
 if (navToggle && mainNav) {
   navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.position = isOpen ? 'fixed' : '';
-    document.body.style.width = isOpen ? '100%' : '';
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (mainNav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
   });
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeNav);
 }
 
 if (navClose) {
