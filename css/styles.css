@@ -1356,7 +1356,8 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
 
 /* Hero logo — large variant (used on homepage) */
 .logo-large img {
-  width: 160px;
-  height: 160px;
-  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.5));
+  width: 320px;
+  height: 320px;
+  border-radius: 24px;
+  filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.6));
 }
