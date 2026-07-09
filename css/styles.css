@@ -1353,3 +1353,10 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   .container { padding-inline: var(--sp-5); }
   .contact-methods { flex-direction: column; }
 }
+
+/* Hero logo — large variant (used on homepage) */
+.logo-large img {
+  width: 160px;
+  height: 160px;
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.5));
+}
