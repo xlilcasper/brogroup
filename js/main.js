@@ -8,21 +8,33 @@
 /* ── Mobile Nav ──────────────────────────────────────────── */
 const navToggle  = document.getElementById('nav-toggle');
 const mainNav    = document.getElementById('main-nav');
+const navClose   = document.getElementById('nav-close');
+
+function closeNav() {
+  mainNav.classList.remove('open');
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+  document.body.style.position = '';
+  document.body.style.width = '';
+  document.body.style.overflow = '';
+}
 
 if (navToggle && mainNav) {
   navToggle.addEventListener('click', () => {
     const isOpen = mainNav.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.position = isOpen ? 'fixed' : '';
+    document.body.style.width = isOpen ? '100%' : '';
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
+}
 
-  // Close on nav link click
+if (navClose) {
+  navClose.addEventListener('click', closeNav);
+}
+
+if (mainNav) {
   mainNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', closeNav);
   });
 }
 

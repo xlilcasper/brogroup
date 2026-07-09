@@ -353,6 +353,28 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
     -webkit-overflow-scrolling: touch;
   }
   .main-nav.open { transform: translateX(0); }
+
+  /* Close button inside mobile nav */
+  .nav-close {
+    display: flex;
+    position: absolute;
+    top: calc(var(--header-h) / 2 - 18px);
+    right: var(--sp-5);
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(245,245,245,0.08);
+    border-radius: var(--r-md);
+    color: var(--clr-text);
+    font-size: 24px;
+    line-height: 1;
+    transition: background var(--t-fast);
+    cursor: pointer;
+    border: none;
+  }
+  .nav-close:hover { background: rgba(245,245,245,0.15); }
+
   .main-nav ul {
     flex-direction: column;
     align-items: flex-start;
