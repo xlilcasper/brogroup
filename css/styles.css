@@ -1361,3 +1361,43 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
   border-radius: 24px;
   filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.6));
 }
+
+
+/* ── What BRO Believes ─────────────────────────────────────── */
+.beliefs-section {
+  padding: var(--section-gap) var(--sp-6);
+  background: var(--clr-bg);
+  text-align: center;
+}
+.beliefs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  max-width: 560px;
+  margin-inline: auto;
+}
+.belief-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  text-align: left;
+  background: var(--clr-bg-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-5) var(--sp-6);
+  font-size: var(--fs-lg);
+  color: var(--clr-text-muted);
+  line-height: var(--lh-relaxed);
+  transition: border-color var(--t-base), box-shadow var(--t-base);
+}
+.belief-item:hover {
+  border-color: rgba(226,176,74,0.25);
+  box-shadow: var(--shadow-md);
+}
+.belief-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+@media (max-width: 640px) {
+  .belief-item { font-size: var(--fs-base); padding: var(--sp-4) var(--sp-5); }
+}
