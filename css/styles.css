@@ -1401,3 +1401,72 @@ h1, h2, h3, h4, h5, h6 { font-weight: var(--fw-bold); line-height: var(--lh-tigh
 @media (max-width: 640px) {
   .belief-item { font-size: var(--fs-base); padding: var(--sp-4) var(--sp-5); }
 }
+
+
+/* ── First Meeting Banner ─────────────────────────────────── */
+.first-meeting-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  background: rgba(226,176,74,0.08);
+  border: 1px solid rgba(226,176,74,0.3);
+  border-radius: var(--r-xl);
+  padding: var(--sp-5) var(--sp-7);
+  margin-bottom: var(--sp-10);
+  font-size: var(--fs-base);
+  color: var(--clr-text-muted);
+  line-height: var(--lh-relaxed);
+}
+.first-meeting-banner svg { flex-shrink: 0; margin-top: 2px; }
+.first-meeting-banner p { margin: 0; }
+.first-meeting-banner a { color: var(--clr-gold); }
+
+/* ── Meeting Detail Grid ──────────────────────────────────── */
+.meeting-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-10);
+}
+@media (max-width: 860px) {
+  .meeting-detail-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .meeting-detail-grid { grid-template-columns: 1fr; }
+}
+.meeting-detail-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  background: var(--clr-bg-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6);
+  transition: border-color var(--t-base), box-shadow var(--t-base);
+}
+.meeting-detail-card:hover {
+  border-color: rgba(226,176,74,0.25);
+  box-shadow: var(--shadow-md);
+}
+.meeting-detail-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--clr-gold-dim);
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.meeting-detail-card h3 {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--clr-text);
+  margin-bottom: var(--sp-2);
+  letter-spacing: 0.02em;
+}
+.meeting-detail-card p {
+  font-size: var(--fs-base);
+  color: var(--clr-text-muted);
+  line-height: var(--lh-relaxed);
+}
