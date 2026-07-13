@@ -177,28 +177,26 @@ if (contactForm) {
     if (submitBtn) submitBtn.disabled = true;
 
     try {
-      // Submit to Formspree (replace YOUR_FORM_ID with actual ID)
-      // For now, simulate a successful submission since we don't have a backend
-      // To enable real form submission: register at formspree.io and replace the URL
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      // Submit to Cloudflare Worker /contact endpoint
+      const response = await fetch('/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         contactForm.hidden = true;
         formSuccess.hidden = false;
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        throw new Error('Server error');
+        formStatus.textContent = (result && result.error) || 'Something went wrong. Please try again.';
+        formStatus.className = 'form-status error';
       }
     } catch (err) {
-      // If Formspree is not configured, show success anyway (for demo purposes)
-      // In production, remove this fallback
-      contactForm.hidden = true;
-      formSuccess.hidden = false;
-      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      formStatus.textContent = 'Network error. Please check your connection and try again.';
+      formStatus.className = 'form-status error';
     } finally {
       if (btnText)  btnText.style.opacity  = '1';
       if (btnLoading) btnLoading.style.display = 'none';
