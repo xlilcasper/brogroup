@@ -3,28 +3,35 @@
  * Cloudflare Worker
  */
 
-async function handleContact(request, env) {
-  const corsHeaders = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type'
-  };
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
 
-  if (request.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    if (url.pathname === '/api/contact' && request.method === 'POST') {
+      return handleContact(request, env);
+    }
+
+    const assets = env.ASSETS;
+    if (assets) {
+      return assets.fetch(request);
+    }
+    return new Response('Service unavailable', { status: 503 });
   }
+};
+
+async function handleContact(request, env) {
+  const headers = { 'Content-Type': 'application/json' };
 
   try {
     const body = await request.json();
     const { name, email, category, message } = body;
 
     if (!name || !email || !category || !message) {
-      return new Response(JSON.stringify({ error: 'Missing required fields.' }), { status: 400, headers: corsHeaders });
+      return new Response(JSON.stringify({ error: 'Missing required fields.' }), { status: 400, headers });
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return new Response(JSON.stringify({ error: 'Invalid email address.' }), { status: 400, headers: corsHeaders });
+      return new Response(JSON.stringify({ error: 'Invalid email address.' }), { status: 400, headers });
     }
 
     const categoryLabels = {
@@ -57,7 +64,7 @@ body{font-family:Inter,Arial,sans-serif;background:#f9f9f9;margin:0;padding:20px
 <div class="container">
   <div class="header">
     <h1>New Contact Form Submission</h1>
-    <p>BRO — Brothers Reclaiming Ourselves</p>
+    <p>BRO &#8212; Brothers Reclaiming Ourselves</p>
   </div>
   <div class="body">
     <div class="field"><div class="label">Name</div><div class="value">${escapeHtml(name)}</div></div>
@@ -74,14 +81,14 @@ body{font-family:Inter,Arial,sans-serif;background:#f9f9f9;margin:0;padding:20px
     const resendRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Authorization': 'Bearer ' + env.RESEND_API_KEY,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: `BRO Contact <info@brogroup.org>`,
+        from: 'BRO Contact <info@brogroup.org>',
         to: env.NOTIFY_EMAIL,
         reply_to: email,
-        subject: `[BRO] ${categoryLabel} — from ${name}`,
+        subject: '[BRO] ' + categoryLabel + ' from ' + name,
         html: emailHtml
       })
     });
@@ -89,14 +96,14 @@ body{font-family:Inter,Arial,sans-serif;background:#f9f9f9;margin:0;padding:20px
     if (!resendRes.ok) {
       const errText = await resendRes.text();
       console.error('Resend error:', errText);
-      return new Response(JSON.stringify({ error: 'Failed to send. Please try again.' }), { status: 500, headers: corsHeaders });
+      return new Response(JSON.stringify({ error: 'Failed to send. Please try again.' }), { status: 500, headers });
     }
 
-    return new Response(JSON.stringify({ success: true }), { headers: corsHeaders });
+    return new Response(JSON.stringify({ success: true }), { status: 200, headers });
 
   } catch (err) {
     console.error('Contact error:', err);
-    return new Response(JSON.stringify({ error: 'Internal server error.' }), { status: 500, headers: corsHeaders });
+    return new Response(JSON.stringify({ error: 'Internal server error.' }), { status: 500, headers });
   }
 }
 
@@ -108,14 +115,3 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 }
-
-addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
-
-  if (url.pathname === '/api/contact' && event.request.method === 'POST') {
-    event.respondWith(handleContact(event.request, env));
-    return;
-  }
-
-  event.respondWith(env.ASSETS.fetch(event.request));
-});

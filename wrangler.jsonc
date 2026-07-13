@@ -4,7 +4,8 @@
   "compatibility_date": "2026-07-10",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
   "main": "worker.js",
   "observability": {
