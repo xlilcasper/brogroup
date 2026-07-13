@@ -112,7 +112,7 @@ function escapeHtml(str) {
 addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  if (url.pathname === '/contact' && event.request.method === 'POST') {
+  if (url.pathname === '/api/contact' && event.request.method === 'POST') {
     event.respondWith(handleContact(event.request, env));
     return;
   }

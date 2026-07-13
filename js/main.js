@@ -178,7 +178,7 @@ if (contactForm) {
 
     try {
       // Submit to Cloudflare Worker /contact endpoint
-      const response = await fetch('/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data),
